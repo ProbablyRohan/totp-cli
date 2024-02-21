@@ -7,12 +7,12 @@
 
   outputs = { self, nixpkgs }: {
 
-    defaultPackage.x86_64-linux =
+    packages.x86_64-linux.default =
 
       with import nixpkgs { system = "x86_64-linux"; };
       buildGoModule rec {
         name = "totp-cli";
-        src = ./.;
+        src = self;
         vendorHash = "sha256-VTlSnw3TyVOQPU+nMDhRtyUrBID2zesGeG2CgDyjwWY=";
       };
   };
