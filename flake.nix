@@ -13,7 +13,7 @@
       buildGoModule rec {
         name = "totp-cli";
         src = self;
-        vendorHash = "sha256-vUallJa8fQrEaCMU17vMgcWMk0wH5iWMzpT+mFWJLNY=";
+        vendorHash = "sha256-GulRmDKatbu4N29Th4rUiVSvvg4hhepyx5X8TLLJ9kQ=";
       };
   };
 }
