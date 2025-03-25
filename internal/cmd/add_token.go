@@ -17,16 +17,10 @@ func AddTokenCommand() *cli.Command {
 		Usage:     "Add new token.",
 		ArgsUsage: "[namespace] [account]",
 		Flags: []cli.Flag{
-			&cli.UintFlag{
-				Name:  "length",
-				Value: s.DefaultTokenLength,
-				Usage: "Length of the generated token.",
-			},
-			&cli.StringFlag{
-				Name:  "prefix",
-				Value: "",
-				Usage: "Prefix for the token.",
-			},
+			flagLength(),
+			flagPrefix(),
+			flagAlgorithm(),
+			flagTimePeriod(),
 		},
 		Action: func(ctx *cli.Context) error {
 			var (
@@ -54,7 +48,14 @@ func AddTokenCommand() *cli.Command {
 				}
 			}
 
-			account = &s.Account{Name: accName, Token: token, Prefix: ctx.String("prefix"), Length: ctx.Uint("length")}
+			account = &s.Account{
+				Name:       accName,
+				Token:      token,
+				Prefix:     ctx.String("prefix"),
+				Length:     ctx.Uint("length"),
+				Algorithm:  ctx.String("algorithm"),
+				TimePeriod: ctx.Int64("time-period"),
+			}
 			namespace.Accounts = append(namespace.Accounts, account)
 
 			err = storage.Save()
